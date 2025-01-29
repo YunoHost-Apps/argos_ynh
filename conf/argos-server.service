@@ -1,9 +1,7 @@
 [Unit]
 Description=Argos server
 Documentation=https://argos-monitoring.framasoft.org/
-Requires=network.target postgresql.service
-After=network.target postgresql.service
-PartOf=postgresql.service
+Requires=network.target
 
 [Service]
 User=__APP__
