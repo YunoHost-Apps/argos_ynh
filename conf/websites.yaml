@@ -1,0 +1,12 @@
+- domain: "https://__DOMAIN__"
+  frequency: "20m"
+  recheck_delay: "5m"
+  # Let’s say it’s an IPv6 only web site
+  ipv4: false
+  paths:
+    - path: "/"
+      checks:
+        - status-is: 301
+    - path: "/nextcloud/"
+      checks:
+        - status-is: 401
