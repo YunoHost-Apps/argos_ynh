@@ -241,7 +241,7 @@ websites:
   #         # Check that JSON response is the exact expected JSON object
   #         # The order of the items in the object does not matter.
   #         - json-is: '{"foo": "bar", "baz": 42}'
-  - domain: "https://nextcloud.ericandmarie.fr"
+  - domain: "https://__DOMAIN__"
     frequency: "20m"
     recheck_delay: "5m"
     # Let’s say it’s an IPv6 only web site
