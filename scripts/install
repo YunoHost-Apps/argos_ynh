@@ -28,7 +28,8 @@ popd
 #=================================================
 ynh_script_progression "Adding $app's configuration files..."
 
-ynh_config_add --template="argos-config.yaml" --destination="$install_dir/config.yaml"
+ynh_config_add --template="config.yaml" --destination="$install_dir/config.yaml"
+ynh_config_add --template="websites.yaml" --destination="$install_dir/websites.yaml"
 ynh_config_add --template="argos-server" --destination="$install_dir/argos-server"
 ynh_config_add --template="argos-agent" --destination="$install_dir/argos-agent"
 
@@ -49,12 +50,11 @@ ynh_config_add_systemd --service="argos-agent" --template="argos-agent.service"
 yunohost service add "argos-server" --description="Monitoring and status board for your websites" --log="/var/log/$app/$app.log"
 yunohost service add "argos-agent" --description="Monitoring and status board for your websites" --log="/var/log/$app/$app.log"
 
-
-pushd $install_dir
-    python3 -m venv $install_dir/venv
-    ynh_hide_warnings $install_dir/venv/bin/argos server migrate --config="$install_dir/config.yaml"
-    ynh_hide_warnings $install_dir/venv/bin/argos server reload-config --config="$install_dir/config.yaml"
-popd
+#pushd $install_dir
+#    python3 -m venv $install_dir/venv
+#    ynh_hide_warnings $install_dir/venv/bin/argos server migrate --config="$install_dir/config.yaml"
+#    ynh_hide_warnings $install_dir/venv/bin/argos server reload-config --config="$install_dir/config.yaml"
+#popd
 
 #=================================================
 # ADD A CRON JOB
