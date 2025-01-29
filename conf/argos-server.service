@@ -12,11 +12,7 @@ WorkingDirectory=__INSTALL_DIR__/
 EnvironmentFile=__INSTALL_DIR__/argos-server
 ExecStartPre=__INSTALL_DIR__/venv/bin/argos server migrate --config=__INSTALL_DIR__/config.yaml
 ExecStartPre=__INSTALL_DIR__/venv/bin/argos server reload-config --config=__INSTALL_DIR__/config.yaml
-ExecStart=__INSTALL_DIR__/venv/bin/gunicorn "argos.server.main:get_application()" \\
-                                       --workers \$ARGOS_SERVER_WORKERS \\
-                                       --worker-class uvicorn.workers.UvicornWorker \\
-                                       --bind \$ARGOS_SERVER_SOCKET \\
-                                       --forwarded-allow-ips \$ARGOS_SERVER_FORWARDED_ALLOW_IPS
+ExecStart=__INSTALL_DIR__/venv/bin/gunicorn "argos.server.main:get_application()" -k uvicorn.workers.UvicornWorker -w 4 -b 127.0.0.1:__PORT__
 ExecReload=__INSTALL_DIR__/venv/bin/argos server reload-config
 SyslogIdentifier=argos-server
 

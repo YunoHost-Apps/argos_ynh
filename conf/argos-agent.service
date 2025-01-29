@@ -9,9 +9,7 @@ User=__APP__
 Group=__APP__
 EnvironmentFile=__INSTALL_DIR__/argos-agent
 WorkingDirectory=__INSTALL_DIR__/
-ExecStart=__INSTALL_DIR__/venv/bin/argos agent --max-tasks \$ARGOS_AGENT_MAX_TASKS \\
-                                          --wait-time \$ARGOS_AGENT_WAIT_TIME \\
-                                          --log-level \$ARGOS_AGENT_LOGLEVEL
+ExecStart=__INSTALL_DIR__/venv/bin/argos agent http://127.0.0.1:__PORT__ "__TOKEN__"
 SyslogIdentifier=argos-agent
 
 [Install]
