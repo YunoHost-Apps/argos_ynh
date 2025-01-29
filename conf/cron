@@ -1,0 +1,2 @@
+*/10 * * * * __INSTALL_DIR__/venv/bin/argos server cleandb --max-lock-seconds 120 --max-results 1200
+*/10 * * * * __INSTALL_DIR__/venv/bin/argos server watch-agents --time-without-agent 10

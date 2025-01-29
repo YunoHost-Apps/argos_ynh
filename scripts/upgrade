@@ -1,0 +1,56 @@
+#!/bin/bash
+
+source _common.sh
+source /usr/share/yunohost/helpers
+
+#=================================================
+# STOP SYSTEMD SERVICE
+#=================================================
+ynh_script_progression "Stopping $app's systemd service..."
+
+ynh_systemctl --service="argos-server" --action="stop"
+ynh_systemctl --service="argos-agent" --action="stop"
+
+#=================================================
+# DOWNLOAD, CHECK AND UNPACK SOURCE
+#=================================================
+ynh_script_progression "Upgrading source files..."
+
+ynh_setup_source --dest_dir="$install_dir" --full_replace --keep="config.yaml argo-server argo-agent"
+
+#=================================================
+# UPDATE A CONFIG FILE
+#=================================================
+ynh_script_progression "Updating $app's configuration files..."
+
+ynh_config_add --template="argos-config.yaml" --destination="$install_dir/config.yaml"
+
+chmod 600 "$install_dir/config.yaml"
+chown "$app:$app" "$install_dir/config.yaml"
+
+#=================================================
+# REAPPLY SYSTEM CONFIGURATIONS
+#=================================================
+ynh_script_progression "Upgrading system configurations related to $app..."
+
+ynh_config_add_nginx
+
+ynh_config_add_systemd --service="argos-server" --template="argos-server.service"
+ynh_config_add_systemd --service="argos-agent" --template="argos-agent.service"
+
+yunohost service add "argos-server" --description="Monitoring and status board for your websites" --log="/var/log/$app/$app.log"
+yunohost service add "argos-agent" --description="Monitoring and status board for your websites" --log="/var/log/$app/$app.log"
+
+#===========================================
+# START SYSTEMD SERVICE
+#=================================================
+ynh_script_progression "Starting $app's systemd service..."
+
+ynh_systemctl --service="argos-server" --action="start"
+ynh_systemctl --service="argos-agent" --action="start"
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+
+ynh_script_progression "Upgrade of $app completed"

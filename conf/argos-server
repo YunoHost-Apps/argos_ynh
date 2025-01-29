@@ -1,0 +1,5 @@
+ARGOS_YAML_FILE="__INSTALL_DIR__/config.yaml"
+ARGOS_SERVER_WORKERS=4
+ARGOS_SERVER_SOCKET=127.0.0.1:__PORT__
+# Comma separated list of IP addresses of the web proxy (usually Nginx)
+ARGOS_SERVER_FORWARDED_ALLOW_IPS=127.0.0.1
