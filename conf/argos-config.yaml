@@ -6,7 +6,7 @@ general:
     # The database URL, as defined in SQLAlchemy docs :
     # https://docs.sqlalchemy.org/en/20/core/engines.html#database-urls
     # Example for SQLite: "sqlite:////tmp/argos.db"
-    url: "postgresql://__DB_USER__:__DB_PWD__@localhost/__DB_NAME__"
+    SQLite: "sqlite:////tmp/argos.db"
     # You configure the size of the database pool of connection, and
     # the max overflow (until when new connections are accepted ?)
     # For details, see

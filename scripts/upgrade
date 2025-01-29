@@ -16,7 +16,7 @@ ynh_systemctl --service="argos-agent" --action="stop"
 #=================================================
 ynh_script_progression "Upgrading source files..."
 
-ynh_setup_source --dest_dir="$install_dir" --full_replace --keep="config.yaml argo-server argo-agent"
+ynh_setup_source --dest_dir="$install_dir" --keep="config.yaml argo-server argo-agent"
 
 #=================================================
 # UPDATE A CONFIG FILE
